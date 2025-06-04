@@ -1,0 +1,18 @@
+services:
+  db:
+    build:
+      context: ./db
+    container_name: tile-server-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: geoapp
+      POSTGRES_USER: geo
+      POSTGRES_PASSWORD: geopass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  pgdata:
