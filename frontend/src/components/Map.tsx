@@ -1,23 +1,21 @@
 import { useEffect, useRef } from "react";
 import { Map as OlMap, View } from "ol";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
 import "ol/ol.css";
+import type Layer from "ol/layer/Layer";
 
-function Map() {
+type Props = {
+  layers: Layer[];
+};
+
+function Map({ layers }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!mapRef.current) return;
 
-    const osmLayer = new TileLayer({
-      preload: Infinity,
-      source: new OSM(),
-    });
-
     const map = new OlMap({
       target: mapRef.current,
-      layers: [osmLayer],
+      layers: layers,
       view: new View({
         center: [0, 0],
         zoom: 2,
@@ -27,15 +25,9 @@ function Map() {
     return () => {
       map.setTarget(undefined);
     };
-  }, []);
+  }, [layers]);
 
-  return (
-    <div
-      ref={mapRef}
-      style={{ height: "100%", width: "100%" }}
-      className="map-container"
-    />
-  );
+  return <div ref={mapRef} className="map-container w-full h-full" />;
 }
 
 export default Map;
