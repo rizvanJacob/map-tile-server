@@ -1,27 +1,12 @@
-import { useState } from "react";
 import "./App.css";
+import Map from "./components/Map";
+import "react-openlayers/dist/index.css"; // for css
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1 className="text-red-400">Vite + React</h1>
-      <div className="card ">
-        <button
-          className="btn btn-primary"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="w-screen h-screen bg-red-200">
+      <Map />
+    </div>
   );
 }
 
