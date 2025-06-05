@@ -1,41 +1,35 @@
 package com.example.mapFileServer.layer;
 
-import com.example.mapFileServer.layer.dtos.LayerCreateDTO;
 import com.example.mapFileServer.layer.dtos.LayerFolderCreateDTO;
 import com.example.mapFileServer.layer.dtos.LayerFolderResponseDTO;
 import com.example.mapFileServer.layer.dtos.LayerResponseDTO;
+import com.example.mapFileServer.storage.StorageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/layers")
 @RequiredArgsConstructor
 public class LayerController {
-    private final LayerService service;
-
+    private final LayerService layerService;
     @PostMapping
-    public ResponseEntity<LayerResponseDTO> createLayer(@RequestBody LayerCreateDTO createDTO) {
-        final var responseBody = service.createLayer(createDTO.getName(),
-                createDTO.getMinZoomLevel(),
-                createDTO.getMaxZoomLevel());
-        return ResponseEntity.ok(responseBody);
+    public LayerResponseDTO createLayer(@RequestParam("files") List<MultipartFile> files) {
+        return layerService.createLayer(files);
     }
 
     @PostMapping("/{folderId}")
-    public ResponseEntity<LayerResponseDTO> createLayerInFolder(@PathVariable Long folderId, @RequestBody LayerCreateDTO createDTO){
-        final var responseBody = service.createLayerInFolder(createDTO.getName(),
-                createDTO.getMinZoomLevel(),
-                createDTO.getMaxZoomLevel(),
-                folderId);
-        return ResponseEntity.ok(responseBody);
+    public LayerResponseDTO createLayerInFolder(@PathVariable Long folderId, @RequestParam("files") List<MultipartFile> files) {
+        return layerService.createLayerInFolder(files, folderId);
     }
 
     @PostMapping("/folders")
-    public ResponseEntity<LayerFolderResponseDTO> createLayerFolder(@RequestBody LayerFolderCreateDTO createDTO) {
-        final var responseBody = service.createLayerFolder(createDTO.getName(),
+    public LayerFolderResponseDTO createLayerFolder(@RequestBody LayerFolderCreateDTO createDTO) {
+        return layerService.createLayerFolder(createDTO.getName(),
                 createDTO.getMinZoomLevel(),
                 createDTO.getMaxZoomLevel());
-        return ResponseEntity.ok(responseBody);
     }
 }

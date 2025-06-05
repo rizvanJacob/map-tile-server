@@ -7,8 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LayerFolderCreateDTO{
+public class LayerFolderCreateDTO {
     private String name;
+    private String description;
     private Double minZoomLevel;
     private Double maxZoomLevel;
 }
