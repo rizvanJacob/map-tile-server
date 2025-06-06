@@ -6,7 +6,7 @@ import { useState } from "react";
 import type Layer from "ol/layer/Layer";
 import TileLayer from "ol/layer/Tile";
 
-function App() {
+const App = () => {
   const [layers, setLayers] = useState<Layer[]>([
     new TileLayer({
       source: new OSM(),
@@ -20,6 +20,6 @@ function App() {
       <LayerList layers={layers} setLayers={setLayers} />
     </div>
   );
-}
+};
 
 export default App;
