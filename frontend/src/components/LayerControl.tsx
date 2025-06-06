@@ -37,23 +37,27 @@ const LayerControl = ({ layers, setLayers }: Props) => {
   //   );
 
   return (
-    <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-64 border px-4 m-2">
-      <legend className="fieldset-legend">Layers</legend>
-      {layers.map((layer, i) => (
-        <label className="label" key={i}>
-          <input
-            type="checkbox"
-            className="toggle toggle-sm"
-            checked={layer.getVisible()}
-            onChange={() => toggleVisibility(i)}
-          />
-          Layer {i + 1}
-        </label>
-      ))}
-      <div className="mt-4">
-        {/* <input type="file" accept=".geojson" onChange={handleFileUpload} /> */}
-      </div>
-    </fieldset>
+    <div className="w-sm h-full flex flex-col">
+      <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-64 border px-4 m-2 flex-1">
+        <legend className="fieldset-legend">Layers</legend>
+        {layers.map((layer, i) => (
+          <label className="label" key={i}>
+            <input
+              type="checkbox"
+              className="toggle toggle-sm"
+              checked={layer.getVisible()}
+              onChange={() => toggleVisibility(i)}
+            />
+            Layer {i + 1}
+          </label>
+        ))}
+      </fieldset>
+      <fieldset className="fieldset m-2">
+        <legend className="fieldset-legend">Upload layer from file</legend>
+        <input type="file" className="file-input file-input-xs" />
+        <button className="btn btn-ghost btn-xs">Upload Layer</button>
+      </fieldset>
+    </div>
   );
 };
 
