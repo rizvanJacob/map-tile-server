@@ -7,7 +7,7 @@ type Props = {
   layers: Layer[];
 };
 
-function Map({ layers }: Props) {
+const Map = ({ layers }: Props) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,6 +28,6 @@ function Map({ layers }: Props) {
   }, [layers]);
 
   return <div ref={mapRef} className="map-container w-full h-full" />;
-}
+};
 
 export default Map;

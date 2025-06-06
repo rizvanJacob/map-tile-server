@@ -1,14 +1,11 @@
-// import { useCallback } from "react";
 import type Layer from "ol/layer/Layer";
-// import VectorLayer from "ol/layer/Vector";
-// import VectorSource from "ol/source/Vector";
 
 type Props = {
   layers: Layer[];
   setLayers: (layers: Layer[]) => void;
 };
 
-function LayerList({ layers, setLayers }: Props) {
+const LayerList = ({ layers, setLayers }: Props) => {
   const toggleVisibility = (index: number) => {
     const newLayers = [...layers];
     const layer = newLayers[index];
@@ -58,6 +55,6 @@ function LayerList({ layers, setLayers }: Props) {
       </div>
     </fieldset>
   );
-}
+};
 
 export default LayerList;
